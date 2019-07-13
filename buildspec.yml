@@ -9,7 +9,7 @@ version: 0.2
 phases:
   install:
     runtime-versions: 
-      nodejs: 8
+      nodejs: 6
     commands:
       - npm install
       - npm install phantomjs
@@ -26,9 +26,7 @@ phases:
     commands:
     - echo Build started on `date`
     - pm2 start bin/wwww -n www -f
-    #running only unit tests for now 
-    - node node_modules/mocha/bin/mocha --recursive t/unit/*
-    #- npm test
+    - npm test
     - pm2 stop www || true
   post_build:
     commands:
