@@ -13,20 +13,23 @@ phases:
     commands:
       - npm install
       - npm install phantomjs
+      - npm install -g pm2
+      - pm2 update
   pre_build:
     commands:
     - node -v
     - npm -v
     - aws --version
-    - npm start
+    - npm rebuild node-sass
+    - npm run-script compile-sass
   build:
     commands:
     - echo Build started on `date`
+    - pm2 start bin/wwww -n www -f
     - npm test
+    - pm2 stop www || true
   post_build:
     commands:
-    - npm rebuild node-sass
-    - npm run-script compile-sass
     - echo Build completed on `date`
 artifacts:
   files:
