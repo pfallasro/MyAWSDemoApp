@@ -18,6 +18,7 @@ phases:
     - node -v
     - npm -v
     - aws --version
+    - npm start
   build:
     commands:
     - echo Build started on `date`
