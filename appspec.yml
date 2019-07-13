@@ -1,18 +1,28 @@
 version: 0.0
 os: linux
 files:
-  - source: /index.html
-    destination: /var/www/html/
+  - source: /
+    destination: /usr/myawsdemoapp
+    overwrite: true
+permissions:
+  - object: /usr/myawsdemoapp/scripts
+    pattern: "*.sh"
+    owner: root
+    group: root
+    mode: 755
+    type:
+      - file
 hooks:
   BeforeInstall:
-    - location: scripts/install_dependencies
+    - location: scripts/before_install.sh
       timeout: 300
-      runas: root
-    - location: scripts/start_server
+  AfterInstall:
+    - location: scripts/after_install.sh
       timeout: 300
-      runas: root
+  ApplicationStart:
+    - location: scripts/app_start.sh
+      timeout: 300
   ApplicationStop:
-    - location: scripts/stop_server
+    - location: scripts/app_stop.sh
       timeout: 300
-      runas: root
 
