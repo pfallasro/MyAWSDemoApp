@@ -17,7 +17,8 @@ phases:
       - npm install phantomjs
   pre_build:
     commands:
-    - echo Logging in to Amazon ECR....
+    - node -v
+    - npm -v
     - aws --version
   build:
     commands:
@@ -25,8 +26,12 @@ phases:
     - node node_modules/mocha/bin/mocha --recursive t/unit/*
   post_build:
     commands:
+    - npm rebuild node-sass
+    - npm run-script compile-sass
     - echo Build completed on `date`
-#artifacts:
+artifacts:
+  files:
+    - '**/*'
     # - location
     # - location
   #discard-paths: yes
