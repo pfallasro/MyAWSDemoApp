@@ -9,7 +9,7 @@ version: 0.2
 phases:
   install:
     runtime-versions: 
-      nodejs: 6
+      nodejs: 8
     commands:
       - npm install
       - npm install phantomjs
