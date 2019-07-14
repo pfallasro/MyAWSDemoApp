@@ -26,7 +26,10 @@ phases:
     commands:
     - echo Build started on `date`
     - pm2 start bin/wwww -n www -f
-    - npm test
+    # Unit Tests
+    - node node_modules/mocha/bin/mocha --recursive t/unit/*
+    # Integration Tests
+    #- node node_modules/mocha/bin/mocha --recursive t/integration/*
     - pm2 stop www || true
   post_build:
     commands:
